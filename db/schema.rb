@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_123803) do
+ActiveRecord::Schema.define(version: 2021_08_27_125532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_123803) do
     t.integer "tier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "loggable_type"
-    t.uuid "loggable_id"
-    t.index ["loggable_type", "loggable_id"], name: "index_insurances_on_loggable"
   end
 
   create_table "investments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -34,9 +31,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_123803) do
     t.uuid "provider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "loggable_type"
-    t.uuid "loggable_id"
-    t.index ["loggable_type", "loggable_id"], name: "index_investments_on_loggable"
   end
 
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +52,19 @@ ActiveRecord::Schema.define(version: 2021_08_27_123803) do
     t.uuid "insurance_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "loggable_type"
+    t.uuid "loggable_id"
+    t.index ["loggable_type", "loggable_id"], name: "index_user_insurances_on_loggable"
+  end
+
+  create_table "user_investments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "investment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "loggable_type"
+    t.uuid "loggable_id"
+    t.index ["loggable_type", "loggable_id"], name: "index_user_investments_on_loggable"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -69,4 +76,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_123803) do
   add_foreign_key "investments", "providers"
   add_foreign_key "user_insurances", "insurances"
   add_foreign_key "user_insurances", "users"
+  add_foreign_key "user_investments", "investments"
+  add_foreign_key "user_investments", "users"
 end

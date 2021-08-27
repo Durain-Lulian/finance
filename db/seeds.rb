@@ -6,13 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 user = User.create()
+puts user.errors.full_messages
 insurance_provider = Provider.create()
-investmemt_provider = Provider.create()
+investment_provider = Provider.create()
 
 insurance = Insurance.create(provider: insurance_provider)
-puts insurance.errors.full_messages
-investment = Investment.create(provider: investmemt_provider)
+investment = Investment.create(provider: investment_provider)
+puts investment.errors.full_messages
 
-log = Log.create(loggable: insurance)
-puts log.errors.full_messages
-Log.create(loggable: investment)
+
+user_insurances = UserInsurance.create(insurance: insurance, user: user)
+user_investments = UserInvestment.create(investment:investment, user: user)
+
+Log.create(loggable: user_investments)
+Log.create(loggable: user_insurances)

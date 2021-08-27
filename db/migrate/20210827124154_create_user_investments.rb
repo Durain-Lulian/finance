@@ -1,6 +1,6 @@
 class CreateUserInvestments < ActiveRecord::Migration[6.1]
   def change
-    create_table :user_investments do |t|
+    create_table :user_investments, id: :uuid  do |t|
       t.uuid :user_id
       t.uuid :investment_id
       t.timestamps
