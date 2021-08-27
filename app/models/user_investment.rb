@@ -1,0 +1,2 @@
+class UserInvestment < ApplicationRecord
+end
