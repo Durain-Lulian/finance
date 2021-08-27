@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_112614) do
+ActiveRecord::Schema.define(version: 2021_08_27_120819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2021_08_27_112614) do
     t.integer "tier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "creditable_type"
-    t.bigint "creditable_id"
-    t.index ["creditable_type", "creditable_id"], name: "index_insurances_on_creditable"
+    t.string "loggable_type"
+    t.uuid "loggable_id"
+    t.index ["loggable_type", "loggable_id"], name: "index_insurances_on_loggable"
   end
 
   create_table "investments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -34,9 +34,15 @@ ActiveRecord::Schema.define(version: 2021_08_27_112614) do
     t.uuid "provider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "creditable_type"
-    t.bigint "creditable_id"
-    t.index ["creditable_type", "creditable_id"], name: "index_investments_on_creditable"
+    t.string "loggable_type"
+    t.uuid "loggable_id"
+    t.index ["loggable_type", "loggable_id"], name: "index_investments_on_loggable"
+  end
+
+  create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "loggable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
