@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_121756) do
+ActiveRecord::Schema.define(version: 2021_08_27_123803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "insurances", force: :cascade do |t|
+  create_table "insurances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.uuid "provider_id"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 2021_08_27_121756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_insurances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "insurance_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -60,4 +67,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_121756) do
 
   add_foreign_key "insurances", "providers"
   add_foreign_key "investments", "providers"
+  add_foreign_key "user_insurances", "insurances"
+  add_foreign_key "user_insurances", "users"
 end

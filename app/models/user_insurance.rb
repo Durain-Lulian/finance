@@ -1,0 +1,2 @@
+class UserInsurance < ApplicationRecord
+end
