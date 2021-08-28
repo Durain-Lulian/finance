@@ -1,4 +1,4 @@
-class Transaction < ApplicationRecord
+class Receipt < ApplicationRecord
     has_many :logs
     belongs_to :user
 
@@ -20,17 +20,21 @@ class Transaction < ApplicationRecord
 
             # add the value
             if cashback_amount < insurance_value_to_upgrade
-                insurance_value += cashback_amount
+                insurance_change = cashback_amount 
+                insurance_value += insurance_change
                 cashback_amount = 0
             else
-                cashback_amount -= insurance_value_to_upgrade
-                insurance_value += insurance_value_to_upgrade
+                insurance_change = insurance_value_to_upgrade
+                cashback_amount -= insurance_change 
+                insurance_value += insurance_change 
             end
         end
         
         investment_value += cashback_amount
         
-        Log.create()
+        Log.create(loggable: insurance, receipt_amount: insurance_change, receipt: self, reason: 'cashback')
+        Log.create(loggable: investment, receipt_amount: cashback_amount, receipt: self, reason: 'cashback')
+
         insurance.update(value: insurance_value)
         investment.update(value: investment_value)
     end

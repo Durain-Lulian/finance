@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "loggable_id"
     t.string "loggable_type"
-    t.float "transaction_amount"
-    t.uuid "transaction_id"
+    t.float "receipt_amount"
+    t.uuid "receipt_id"
+    t.string "reason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -49,8 +50,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "receipt_id"
+  create_table "receipts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.float "cashback_amount"
     t.datetime "created_at", precision: 6, null: false
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
 
   add_foreign_key "insurances", "providers"
   add_foreign_key "investments", "providers"
-  add_foreign_key "logs", "transactions"
-  add_foreign_key "transactions", "users"
+  add_foreign_key "logs", "receipts"
+  add_foreign_key "receipts", "users"
   add_foreign_key "user_insurances", "insurances"
   add_foreign_key "user_insurances", "users"
   add_foreign_key "user_investments", "investments"
