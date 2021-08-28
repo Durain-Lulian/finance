@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.string "name"
     t.text "description"
     t.uuid "provider_id"
-    t.integer "tier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -61,6 +60,8 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.uuid "user_id"
     t.uuid "insurance_id"
     t.float "value"
+    t.boolean "expired"
+    t.integer "tier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "loggable_type"

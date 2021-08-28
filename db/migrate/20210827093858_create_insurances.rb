@@ -4,7 +4,6 @@ class CreateInsurances < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.uuid :provider_id
-      t.integer :tier
       t.timestamps
     end
   end

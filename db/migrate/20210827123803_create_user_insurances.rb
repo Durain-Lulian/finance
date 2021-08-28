@@ -4,6 +4,8 @@ class CreateUserInsurances < ActiveRecord::Migration[6.1]
       t.uuid :user_id
       t.uuid :insurance_id
       t.float :value
+      t.boolean :expired
+      t.integer :tier
       t.timestamps
     end
 
