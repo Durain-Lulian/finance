@@ -10,6 +10,7 @@ module Finance
   class Application < Rails::Application
     config.time_zone = 'Asia/Singapore'
     config.active_record.default_timezone = :local
+    config.hosts << "shopin-nlb-2e8c56778828d4fe.elb.ap-southeast-1.amazonaws.com"
     # config.hosts << "internal-tumpang-1967021414.ap-southeast-1.elb.amazonaws.com"
     # config.hosts << "tumpang-nlb-43349993c0bf291a.elb.ap-southeast-1.amazonaws.com"
     config.action_dispatch.default_headers = {
