@@ -8,17 +8,22 @@ class User < ApplicationRecord
     has_many :user_investments
     
     after_create :add_insurance
+    after_create :add_investment
     after_create :renew_insurance
 
     def add_insurance
         s = UserInsurance.create(user: self, value: 10, expired: false, insurance: Insurance.first)
+    end
+
+    def add_investment
+        s = UserInvestment.create(user: self, value: 0, investment: Investment.first)
         puts s.errors.full_messages
     end
 
     def renew_insurance
         scheduler = Rufus::Scheduler.new
 
-        scheduler.every '5s' do
+        scheduler.every '1m' do
             self.user_insurances.order(:created_at).last.update(expired: true)
 
             UserInsurance.create(user: self, value: 10, expired: false, insurance: Insurance.first)

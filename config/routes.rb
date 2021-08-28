@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   get '/finance/healthcheck', to: 'application#healthcheck'
 
+  # receipts
   post '/finance/receipts/add', to: 'receipt#add'
+
+  # users
+  post '/finance/users/add', to: 'user#add'
 end

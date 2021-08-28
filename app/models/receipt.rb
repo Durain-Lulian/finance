@@ -3,6 +3,7 @@ class Receipt < ApplicationRecord
     belongs_to :user
 
     def update_logs
+        puts "updating logs"
         cashback_amount = self.cashback_amount
         user = self.user
 
@@ -13,7 +14,7 @@ class Receipt < ApplicationRecord
         investment_value = investment.value
 
         # change
-        next_tier_value = 50
+        next_tier_value = insurance.max
         if insurance_value < next_tier_value
             # calculate value needed for next tier
             insurance_value_to_upgrade = next_tier_value - insurance_value
@@ -33,7 +34,7 @@ class Receipt < ApplicationRecord
         investment_value += cashback_amount
         
         Log.create(loggable: insurance, receipt_amount: insurance_change, receipt: self, reason: 'cashback')
-        Log.create(loggable: investment, receipt_amount: cashback_amount, receipt: self,s reason: 'cashback')
+        Log.create(loggable: investment, receipt_amount: cashback_amount, receipt: self, reason: 'cashback')
 
         insurance.update(value: insurance_value)
         investment.update(value: investment_value)
