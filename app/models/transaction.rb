@@ -1,12 +1,13 @@
 class Transaction < ApplicationRecord
     has_many :logs
+    belongs_to :user
 
     def update_logs
         cashback_amount = self.cashback_amount
         user = self.user
 
-        insurance = user.user_insurance.first
-        investment = user.user_investment.first
+        insurance = user.user_insurances.first
+        investment = user.user_investments.first
 
         insurance_value = insurance.value
         investment_value = investment.value

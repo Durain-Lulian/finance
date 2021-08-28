@@ -15,8 +15,8 @@ investment = Investment.create(provider: investment_provider)
 puts investment.errors.full_messages
 
 
-user_insurances = UserInsurance.create(insurance: insurance, user: user)
-user_investments = UserInvestment.create(investment:investment, user: user)
+user_insurances = UserInsurance.create(insurance: insurance, user: user, value: 10)
+user_investments = UserInvestment.create(investment:investment, user: user, value: 0)
 
-Log.create(loggable: user_investments)
-Log.create(loggable: user_insurances)
+# Log.create(loggable: user_investments)
+# Log.create(loggable: user_insurances)

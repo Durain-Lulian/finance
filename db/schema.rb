@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
 
   create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "receipt_id"
+    t.uuid "user_id"
     t.float "cashback_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
   add_foreign_key "insurances", "providers"
   add_foreign_key "investments", "providers"
   add_foreign_key "logs", "transactions"
+  add_foreign_key "transactions", "users"
   add_foreign_key "user_insurances", "insurances"
   add_foreign_key "user_insurances", "users"
   add_foreign_key "user_investments", "investments"
