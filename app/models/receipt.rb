@@ -33,7 +33,7 @@ class Receipt < ApplicationRecord
         investment_value += cashback_amount
         
         Log.create(loggable: insurance, receipt_amount: insurance_change, receipt: self, reason: 'cashback')
-        Log.create(loggable: investment, receipt_amount: cashback_amount, receipt: self, reason: 'cashback')
+        Log.create(loggable: investment, receipt_amount: cashback_amount, receipt: self,s reason: 'cashback')
 
         insurance.update(value: insurance_value)
         investment.update(value: investment_value)
