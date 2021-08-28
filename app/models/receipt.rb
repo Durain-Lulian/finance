@@ -7,7 +7,9 @@ class Receipt < ApplicationRecord
         cashback_amount = self.cashback_amount
         user = self.user
 
-        insurance = user.user_insurances.first
+        user.update(total_cashback: user.total_cashback + cashback_amount)
+
+        insurance = user.user_insurances.order(:created_at).last
         investment = user.user_investments.first
 
         insurance_value = insurance.value

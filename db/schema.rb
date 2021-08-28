@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.float "total_cashback"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

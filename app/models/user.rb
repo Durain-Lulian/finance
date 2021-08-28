@@ -23,10 +23,10 @@ class User < ApplicationRecord
     def renew_insurance
         scheduler = Rufus::Scheduler.new
 
-        scheduler.every '1m' do
+        scheduler.every ENV['INSURANCE_RENEW_INTERVAL'] do
             self.user_insurances.order(:created_at).last.update(expired: true)
 
-            UserInsurance.create(user: self, value: 10, expired: false, insurance: Insurance.first)
+            UserInsurance.create(user: self, value: 0, expired: false, insurance: Insurance.first)
         end
     end
 end
