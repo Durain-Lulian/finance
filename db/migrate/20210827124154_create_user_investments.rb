@@ -3,6 +3,7 @@ class CreateUserInvestments < ActiveRecord::Migration[6.1]
     create_table :user_investments, id: :uuid  do |t|
       t.uuid :user_id
       t.uuid :investment_id
+      t.float :value
       t.timestamps
     end
 

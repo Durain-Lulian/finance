@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_125532) do
+ActiveRecord::Schema.define(version: 2021_08_28_102125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_125532) do
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "loggable_id"
     t.string "loggable_type"
+    t.uuid "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -47,9 +48,17 @@ ActiveRecord::Schema.define(version: 2021_08_27_125532) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "receipt_id"
+    t.float "cashback_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_insurances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "insurance_id"
+    t.float "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "loggable_type"
@@ -60,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_125532) do
   create_table "user_investments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "investment_id"
+    t.float "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "loggable_type"
@@ -74,6 +84,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_125532) do
 
   add_foreign_key "insurances", "providers"
   add_foreign_key "investments", "providers"
+  add_foreign_key "logs", "transactions"
   add_foreign_key "user_insurances", "insurances"
   add_foreign_key "user_insurances", "users"
   add_foreign_key "user_investments", "investments"

@@ -3,6 +3,7 @@ class CreateUserInsurances < ActiveRecord::Migration[6.1]
     create_table :user_insurances, id: :uuid do |t|
       t.uuid :user_id
       t.uuid :insurance_id
+      t.float :value
       t.timestamps
     end
 

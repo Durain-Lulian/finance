@@ -5,5 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[6.1]
       t.float :cashback_amount
       t.timestamps
     end
+    
+    add_foreign_key :logs, :transactions
   end
 end
