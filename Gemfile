@@ -25,6 +25,15 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# slug
+gem 'friendly_id', '~> 5.4.0'
+
+# serializer lerializer
+gem 'jsonapi-serializer'
+
+# cors
+gem 'rack-cors'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
