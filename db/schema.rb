@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "loggable_id"
     t.string "loggable_type"
+    t.float "transaction_amount"
     t.uuid "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

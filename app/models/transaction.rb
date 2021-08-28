@@ -30,6 +30,7 @@ class Transaction < ApplicationRecord
         
         investment_value += cashback_amount
         
+        Log.create()
         insurance.update(value: insurance_value)
         investment.update(value: investment_value)
     end
