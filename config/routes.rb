@@ -8,9 +8,12 @@ Rails.application.routes.draw do
 
   # users
   post '/finance/users/add', to: 'user#add'
+  post '/finance/users/investment', to: 'user#investment'
+  post '/finance/users/insurance', to: 'user#insurance'
 
   # logs 
   post '/finance/logs/cashback', to: 'log#cashback'
   post '/finance/logs/investment', to: 'log#investment'
   post '/finance/logs/insurance', to: 'log#insurance'
+  
 end

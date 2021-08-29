@@ -51,7 +51,7 @@ class LogController < ApplicationController
         
         logs.each do |log|
 
-            if log.created_at > current_date + 1.days
+            if log.created_at > current_date + 1.minutes
                 sum = 0
             end
 
