@@ -40,6 +40,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # cron
 gem 'rufus-scheduler'
 
+gem 'aws-sdk-qldbsession'
+gem 'aws-sdk-qldb'
+gem 'aws-eventstream'
+gem 'aws-sdk-transcribestreamingservice'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
