@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_28_102125) do
+ActiveRecord::Schema.define(version: 2021_08_29_084352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.uuid "provider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "plan"
   end
 
   create_table "investments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -30,6 +31,8 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.uuid "provider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "value_per_unit"
+    t.string "ticker"
   end
 
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -47,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_102125) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "receipts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
