@@ -7,8 +7,8 @@ class ReceiptController < ApplicationController
         user = User.find_by(id: user_id)
 
         receipt = Receipt.create(id: receipt_id, cashback_amount: cashback_amount, user: user)
-        receipt.update_logs
+        logs = receipt.update_logs
 
-        render json: { investment: user.user_investments.first, insurance: user.user_insurances.first }
+        render json: { investment: user.user_investments.first, insurance: user.user_insurances.first, logs: logs }
     end
 end
