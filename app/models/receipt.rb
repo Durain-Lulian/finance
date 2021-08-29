@@ -3,7 +3,6 @@ class Receipt < ApplicationRecord
     belongs_to :user
 
     def update_logs
-        puts "updating logs"
         cashback_amount = self.cashback_amount
         user = self.user
 
