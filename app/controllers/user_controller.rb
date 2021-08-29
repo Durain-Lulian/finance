@@ -30,5 +30,15 @@ class UserController < ApplicationController
 
         render json: serializer.serializable_hash, status: 200
     end
+
+    def portfolio
+        user_id = params[:user_id]
+
+        user = User.find_by_id(user_id)
+
+        serializer = UserSerializer.new(user)
+
+        render json: serializer.serializable_hash, status: 200
+    end
 end
     

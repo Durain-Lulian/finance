@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/finance/users/add', to: 'user#add'
   post '/finance/users/investment', to: 'user#investment'
   post '/finance/users/insurance', to: 'user#insurance'
+  post '/finance/users/portfolio', to: 'user#portfolio'
 
   # logs 
   post '/finance/logs/cashback', to: 'log#cashback'
