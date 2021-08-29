@@ -22,6 +22,18 @@ class LogController < ApplicationController
         render json: cumulative, status: 200
     end
 
+    def investment
+        user_id = params[:user_id]
+
+        user = User.find_by(id: user_id)
+
+        receipts = Receipt.where(user: user)
+        logs = Log.where(receipt: receipts, loggable_type: 'UserInvestment').order(:created_at)
+        
+        cumulative = investment_to_cumulative_history(logs)
+        render json: cumulative, status: 200
+    end
+
     def cashback_to_cumulative_history(receipts)
         sum = 0
 
@@ -34,17 +46,27 @@ class LogController < ApplicationController
     end
 
     def insurance_to_cumulative_history(logs)
-        sum = 0.to_f
+        sum = 0
         current_date = logs.first.created_at
         
         logs.each do |log|
-            # puts log.receipt_amount
-            if log.created_at > current_date + 30.days
-                sum = 0.to_f
+
+            if log.created_at > current_date + 1.days
+                sum = 0
             end
 
-            sum = log.receipt_amount
-            log.receipt_amount += sum
+            sum += log.receipt_amount
+            log.receipt_amount = sum
+        end
+        logs
+    end
+
+    def investment_to_cumulative_history(logs)
+        sum = 0
+        
+        logs.each do |log|
+            sum += log.receipt_amount
+            log.receipt_amount = sum
         end
         logs
     end
